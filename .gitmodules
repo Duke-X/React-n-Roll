@@ -1,0 +1,3 @@
+[submodule "StaticPage/StaticPage/static_page_eg"]
+	path = StaticPage/StaticPage/static_page_eg
+	url = https://github.com/Duke-X/React-n-Roll.git
