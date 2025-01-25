@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Types.ObjectId;
 
-mongoose.connect("mongodb+srv://vadishchhatwal2321:takku2321@cluster0.iv4tf.mongodb.net/");
+mongoose.connect("mongodb+srv://vadishchhatwal2321:takku2321@cluster0.iv4tf.mongodb.net/CourseSell");
 
 const userSchema = new Schema({
     firstName : String,
@@ -27,7 +27,6 @@ const courseSchema = new Schema({
 });
 
 const purchaseSchema = new Schema({
-    _id : ObjectId,
     courseId : ObjectId,
     userId : ObjectId
 });

@@ -13,21 +13,21 @@ adminRouter.post('/login', (req, res) => {
     })
 });
 
-adminRouter.post('/create-course', (req, res) => {
+adminRouter.post('/course', (req, res) => {
     res.json({
         message : "create course endpoint"
     })
 });
 
-adminRouter.post('/del-course', (req, res) => {
+adminRouter.put('/course', (req, res) => {
     res.json({
-        message : "delete course endpoint"
+        message : "update course endpoint"
     })
 });
 
-adminRouter.post('/add-course-cont', (req, res) => {
+adminRouter.get('/course/bulk', (req, res) => {
     res.json({
-        message : "add course endpoint"
+        message : "fetch courses"
     })
 });
 
