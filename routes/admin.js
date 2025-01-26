@@ -67,10 +67,23 @@ adminRouter.post("/login", async (req, res) => {
   }
 });
 
-adminRouter.post("/course", middlewareAdmin, (req, res) => {
-  res.json({
-    message: "create course endpoint",
+adminRouter.post("/course", middlewareAdmin, async (req, res) => {
+  const adminId = req.userId;
+
+  const {title, description, price, imageUrl} = req.body;
+
+  const course = await courseModel.create({
+    title,
+    description,
+    price,
+    imageUrl,
+    creatorID : adminId
   });
+
+  res.json({
+    message : "Course Created",
+    courseId : course._id
+  })
 });
 
 adminRouter.put("/course", (req, res) => {

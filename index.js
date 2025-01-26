@@ -2,6 +2,7 @@
 // const mongoose = require('mongoose');
 const express = require("express");
 const jwt = require("jsonwebtoken");
+require('dotenv').config();
 
 const { userRouter } = require("./routes/user");
 const { courseRouter } = require("./routes/course");
