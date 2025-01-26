@@ -1,5 +1,5 @@
 //ALWAYS BUILD THE BACKEND FIRST THEN FRONTEND
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 
