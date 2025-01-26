@@ -3,9 +3,9 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 
-const {userRouter} = require('./user');
-const {courseRouter} = require('./course');
-const {adminRouter} = require('./admin');
+const {userRouter} = require('./route/user');
+const {courseRouter} = require('./route/course');
+const {adminRouter} = require('./route/admin');
 
 const app = express();
 //to parse the JSON data to object so that body can give back the data
