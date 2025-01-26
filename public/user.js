@@ -28,7 +28,7 @@ userRouter.post('/signup', async (req,res) => {
         firstName,
         lastName,
         email,
-        hashPass
+        password : hashPass
     });
     res.json({
         message : "Successfully Signed Up"
@@ -41,7 +41,6 @@ userRouter.post('/login', async (req, res) => {
 
     const user = await userModel.findOne({
         email, 
-        password
     });
 
     if(!user){
@@ -50,7 +49,7 @@ userRouter.post('/login', async (req, res) => {
         })
     }
 
-    const matchPass = bcrypt.compare(password, user.password);
+    const matchPass = bcrypt.compare(password, user.hashPass);
 
     if(matchPass){
         const token = jwt.sign({
@@ -58,7 +57,7 @@ userRouter.post('/login', async (req, res) => {
         }, JWT_SECRET);
 
         res.json({
-            token
+            message : "Successfully Signed In, Here's your token : " + token
         })
     }
     else{
@@ -66,10 +65,6 @@ userRouter.post('/login', async (req, res) => {
             message : "Incorrect Credentials"
         })
     }
-
-    res.json({
-        message : "Successfully Logged In"
-    })
 });
 
 userRouter.get('/all-courses', (req, res) => {

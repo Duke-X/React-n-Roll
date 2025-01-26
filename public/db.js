@@ -6,14 +6,14 @@ mongoose.connect("mongodb+srv://vadishchhatwal2321:takku2321@cluster0.iv4tf.mong
 
 const userSchema = new Schema({
     firstName : String,
-    secondName : String,
+    lastName : String,
     email : {type : String, unique : true},
     password : String
 });
 
 const adminSchema = new Schema({
     firstName : String,
-    secondName : String,
+    lastName : String,
     email : {type : String, unique : true},
     password : String
 });
