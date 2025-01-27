@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const userRouter = Router();
 const { z } = require("zod");
-const { userModel } = require("../db");
+const { userModel, purchaseModel, courseModel } = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const {JWT_USER} = require('../config');
@@ -69,9 +69,19 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
-userRouter.get("/all-courses", middlewareUser, (req, res) => {
+userRouter.get("/my-courses", middlewareUser, async(req, res) => {
+  const userId = req.userId;
+  const purchase = await purchaseModel.find({            //this returns the array containing id, userid, courseid, instead of giving the course details
+    userId
+  })
+
+  const courseData = courseModel.find({
+    _id : {$in : purchase.map(x => x.courseId)}         //this will traverse the purchase array find the courseId, which will be the _id of the courses
+  })
+
   res.json({
-    message: "All Course Endpoint",
+    purchase,
+    courseData
   });
 });
 

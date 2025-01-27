@@ -1,15 +1,27 @@
 const {Router} = require('express');
+const { middlewareUser } = require('../middleware/user');
+const { purchaseModel } = require('../db');
 const courseRouter = Router();
 
-courseRouter.post('/purchase', (req, res) => {
+courseRouter.post('/purchase', middlewareUser, async(req, res) => {
+    const userId = req.userId;
+    const courseId = req.body.courseId;
+
+    await purchaseModel.create({
+        userId,
+        courseId
+    })
+
     res.json({
-        message : "Buying Endpoint"
+        message : "Course Bought Successfully"
     })
 });
 
-courseRouter.get('/my-courses', (req, res) => {
+courseRouter.get('/preview', async(req, res) => {
+    const courses = await courseModel.find({});        //empty array means, give me all the courses
+
     res.json({
-        message : "My Course Endpoint"
+        courses
     })
 });
 
