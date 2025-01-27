@@ -2,7 +2,7 @@ const { Router } = require("express");
 const adminRouter = Router();
 const bcrypt = require("bcrypt");
 const { z } = require("zod");
-const { adminModel } = require("../db");
+const { adminModel, courseModel } = require("../db");
 const jwt = require("jsonwebtoken");
 const { JWT_ADMIN } = require("../config");
 const { middlewareAdmin } = require("../middleware/admin");
@@ -47,7 +47,7 @@ adminRouter.post("/login", async (req, res) => {
     });
   }
 
-  const matchPass = bcrypt.compare(password, admin.hashPass);
+  const matchPass = await bcrypt.compare(password, admin.password);
 
   if (matchPass) {
     const token = jwt.sign(
@@ -117,7 +117,7 @@ adminRouter.get("/course/bulk", middlewareAdmin, async (req, res) => {
   });
 
   res.json({
-    message : "Course Created",
+    message : "Course Retrieved",
     courses
   })
 });

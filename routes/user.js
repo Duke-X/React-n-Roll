@@ -49,7 +49,7 @@ userRouter.post("/login", async (req, res) => {
     });
   }
 
-  const matchPass = bcrypt.compare(password, user.hashPass);
+  const matchPass = await bcrypt.compare(password, user.password);
 
   if (matchPass) {
     const token = jwt.sign(
@@ -75,7 +75,7 @@ userRouter.get("/my-courses", middlewareUser, async(req, res) => {
     userId
   })
 
-  const courseData = courseModel.find({
+  const courseData = await courseModel.find({
     _id : {$in : purchase.map(x => x.courseId)}         //this will traverse the purchase array find the courseId, which will be the _id of the courses
   })
 
@@ -86,5 +86,5 @@ userRouter.get("/my-courses", middlewareUser, async(req, res) => {
 });
 
 module.exports = {
-  userRouter,
+  userRouter
 };
